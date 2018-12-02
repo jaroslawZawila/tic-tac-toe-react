@@ -9,7 +9,9 @@ enablePlugins(ScalaJSBundlerPlugin)
 
 scalaJSUseMainModuleInitializer := true
 
-libraryDependencies += "com.github.japgolly.scalajs-react" %%% "core" % "1.3.1"
+libraryDependencies ++= Seq(
+  "com.github.japgolly.scalajs-react" %%% "core" % "1.3.1",
+  "com.github.japgolly.scalajs-react" %%% "extra" % "1.3.1")
 
 npmDependencies in Compile ++= Seq(
   "react" -> "16.5.1",
