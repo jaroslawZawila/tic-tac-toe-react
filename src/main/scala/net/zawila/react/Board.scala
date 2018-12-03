@@ -13,17 +13,17 @@ object Board  {
       <.div(
         <.div(^.className := "status", status),
         <.div(^.className := "board-row",
-          Square.Component(),
-          Square.Component(),
-          Square.Component()),
+          Square(1),
+          Square(2),
+          Square(3)),
         <.div(^.className := "board-row",
-          Square.Component(),
-          Square.Component(),
-          Square.Component()),
+          Square(4),
+          Square(5),
+          Square(6)),
         <.div(^.className := "board-row",
-          Square.Component(),
-          Square.Component(),
-          Square.Component())
+          Square(7),
+          Square(8),
+          Square(9))
       )
   }
 

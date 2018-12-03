@@ -8,13 +8,15 @@ object Square {
 
   case class Props(number: Int)
 
-  final class Backend($: BackendScope[Unit, Props]) {
+  final class Backend($: BackendScope[Props, Props]) {
     def render(p: Props): VdomElement =
       <.button(^.className := "Square", p.number)
   }
 
-  val Component = ScalaComponent.builder[Unit]("Square")
+  val Component = ScalaComponent.builder[Props]("Square")
     .initialState(Props(1))
     .renderBackend[Backend]
     .build
+
+  def apply(s:Int) = Component(Props(s))
 }
