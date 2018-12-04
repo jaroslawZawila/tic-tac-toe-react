@@ -7,18 +7,11 @@ object Square {
 
   case class Props(number: String, onClick: Callback)
 
-  final class Backend($: BackendScope[Props, Unit]) {
-
-    def render(p: Props): VdomElement =
-      <.button(
-        ^.className := "Square",
-        ^.onClick --> p.onClick,
-        p.number)
-  }
-
-  val Component = ScalaComponent.builder[Props]("Square")
-    .renderBackend[Backend]
-    .build
+  val Component = ScalaFnComponent[Props](
+      p => <.button(
+      ^.className := "Square",
+      ^.onClick --> p.onClick,
+      p.number))
 
   def apply(s:String, c: Callback) = Component(Props(s.toString, c))
 }
