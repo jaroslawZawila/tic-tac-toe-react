@@ -7,30 +7,23 @@ import org.scalajs.dom
 
 object Square {
 
-  case class Props(number: String)
+  case class Props(number: String, onClick: Callback)
   case class State(number: String)
 
 
 
-  final class Backend($: BackendScope[Props, State]) {
+  final class Backend($: BackendScope[Props, Unit]) {
 
-    def click = {
-      println("pressed X")
-      $.props.flatMap(item => $.modState(_.copy("X")))
-
-    }
-
-    def render(p: Props, s: State): VdomElement =
+    def render(p: Props): VdomElement =
       <.button(
         ^.className := "Square",
-        ^.onClick --> click,
-        s.number)
+        ^.onClick --> p.onClick,
+        p.number)
   }
 
   val Component = ScalaComponent.builder[Props]("Square")
-    .initialStateFromProps(p => State(p.number))
     .renderBackend[Backend]
     .build
 
-  def apply(s:Int) = Component(Props(s.toString))
+  def apply(s:String, c: Callback) = Component(Props(s.toString, c))
 }
