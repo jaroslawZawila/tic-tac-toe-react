@@ -6,36 +6,45 @@ import japgolly.scalajs.react.extra._
 
 object Board  {
 
-  case class State(squares: List[String])
+  case class State(squares: List[String], isXNext: Boolean)
 
   final class Backend($: BackendScope[Unit, State]) {
 
-    val status = "Next player: X"
+
 
     def handleClick(int: Int) = {
-      $.modState(s => State(s.squares.updated(int, "X")))
+      $.modState(s => {
+        val xOrO = if(s.isXNext) "X" else "O"
+        State(s.squares.updated(int, xOrO), !s.isXNext)
+      })
     }
 
-    def render(p: Unit, state: State): VdomElement =
+    def render(p: Unit, state: State): VdomElement = {
+      val xOrO = if(state.isXNext) "X" else "O"
+      val status = s"Next player: $xOrO"
       <.div(
         <.div(^.className := "status", status),
         <.div(^.className := "board-row",
-          Square(state.squares(0), handleClick(0)),
-          Square(state.squares(1), handleClick(1)),
-          Square(state.squares(2), handleClick(2))),
+          renderSquare(0, state),
+          renderSquare(1, state),
+          renderSquare(2, state)),
         <.div(^.className := "board-row",
-          Square(state.squares(3), handleClick(3)),
-          Square(state.squares(4), handleClick(4)),
-          Square(state.squares(5), handleClick(5))),
+          renderSquare(3, state),
+          renderSquare(4, state),
+          renderSquare(5, state)),
         <.div(^.className := "board-row",
-          Square(state.squares(6), handleClick(6)),
-          Square(state.squares(7), handleClick(7)),
-          Square(state.squares(8), handleClick(8)))
+          renderSquare(6, state),
+          renderSquare(7, state),
+          renderSquare(8, state))
       )
+    }
+
+
+    def renderSquare(i: Int, state: State) = Square(state.squares(i), handleClick(i))
   }
 
   val Component = ScalaComponent.builder[Unit]("Board")
-    .initialState(State((11 to 19).map(_.toString).toList))
+    .initialState(State((11 to 19).map(_.toString).toList, true))
     .renderBackend[Backend]
     //.configure(Reusability.shouldComponentUpdate)
     .build
