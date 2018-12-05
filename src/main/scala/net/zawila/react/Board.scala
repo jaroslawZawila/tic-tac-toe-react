@@ -23,8 +23,10 @@ object Board  {
   def calculateWinner(s: List[String]) = {
     winningComibinations.foldLeft(Option.empty[String]) { (x, y) =>
       y match {
-        case a :: b :: c :: Nil => if (s(a) == s(b) && s(a) == s(c)) Some(s(a)) else None
-        case _ => None
+        case a :: b :: c :: Nil => {
+          if (s(a) == s(b) && s(a) == s(c)) Some(s(a)) else x
+        }
+        case _ => x
       }
     }
   }
