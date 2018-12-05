@@ -3,6 +3,7 @@ package net.zawila.react
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.vdom.html_<^._
 import japgolly.scalajs.react.extra._
+import scalacss.ScalaCssReact._
 
 object Board  {
 
@@ -46,7 +47,7 @@ object Board  {
       val winner = calculateWinner(state.squares)
       val status = winner.map(w => s"Winner: $w").getOrElse(s"Next player: '$xOrO'")
       <.div(
-        <.div(^.className := "status", status),
+        <.div(^.className := "status", status, CSS.body),
         <.div(^.className := "board-row",
           renderSquare(0, state),
           renderSquare(1, state),

@@ -4,8 +4,12 @@ import japgolly.scalajs.react._
 import japgolly.scalajs.react.vdom.html_<^._
 import japgolly.scalajs.react.extra._
 import org.scalajs.dom.document
+import org.scalajs.dom.raw.HTMLStyleElement
 
 import scala.scalajs.js.annotation.JSExport
+import scalacss.ScalaCssReact._
+import scalacss.DevDefaults._
+import scalacss.ScalaCssReact  // Always use dev settings
 
 object Game {
 
@@ -29,6 +33,8 @@ object Game {
 
   @JSExport
   def main(args: Array[String]): Unit = {
+//    document.head.appendChild(CSS.render[HTMLStyleElement])
+    CSS.addToDocument()
     Game.Component().renderIntoDOM(document.body)
   }
 }
