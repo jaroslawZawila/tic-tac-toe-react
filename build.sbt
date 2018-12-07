@@ -6,6 +6,7 @@ scalaVersion := "2.12.7"
 
 enablePlugins(ScalaJSPlugin)
 enablePlugins(ScalaJSBundlerPlugin)
+enablePlugins(WebScalaJSBundlerPlugin)
 
 scalaJSUseMainModuleInitializer := true
 
@@ -17,4 +18,9 @@ libraryDependencies ++= Seq(
 
 npmDependencies in Compile ++= Seq(
   "react" -> "16.5.1",
-  "react-dom" -> "16.5.1")
+  "react-dom" -> "16.5.1",
+  "bootstrap" -> "4.1.3")
+
+npmAssets ++= NpmAssets.ofProject(LocalProject("react-js")) { nodeModules =>
+  (nodeModules / "bootstrap").allPaths // sbt 1.0.0+
+}.value

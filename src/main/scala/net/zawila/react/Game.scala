@@ -6,7 +6,7 @@ import japgolly.scalajs.react.extra._
 import org.scalajs.dom.document
 import org.scalajs.dom.raw.HTMLStyleElement
 
-import scala.scalajs.js.annotation.JSExport
+import scala.scalajs.js.annotation.{JSExport, JSImport}
 import scalacss.ScalaCssReact._
 import scalacss.DevDefaults._
 import scalacss.ScalaCssReact  // Always use dev settings
@@ -31,6 +31,7 @@ object Game {
     //.configure(Reusability.shouldComponentUpdate)
     .build
 
+  @JSImport("bootstrap", JSImport.Namespace)
   @JSExport
   def main(args: Array[String]): Unit = {
 //    document.head.appendChild(CSS.render[HTMLStyleElement])

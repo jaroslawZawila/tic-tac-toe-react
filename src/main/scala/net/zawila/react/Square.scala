@@ -9,7 +9,7 @@ object Square {
 
   val Component = ScalaFnComponent[Props](
       p => <.button(
-      ^.className := "Square",
+      ^.className := "btn btn-success",
       ^.onClick --> p.onClick,
       p.number))
 
