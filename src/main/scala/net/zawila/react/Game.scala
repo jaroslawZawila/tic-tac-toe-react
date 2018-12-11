@@ -22,7 +22,10 @@ object Game {
         <.div(^.className := "game-info",
           <.div,
           <.ol
-        )
+        ),
+        <.div(
+        BankHolidayComponent.Component()
+      )
       )
   }
 
